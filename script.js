@@ -108,6 +108,73 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    let reminders = [];
+    let editingReminder = null;
+
+    addReminderButton.addEventListener("click", () => {
+        editingReminder = null;
+        reminderForm.reset();
+        document.querySelector("#reminder-modal h2").textContent = "New Reminder";
+        reminderModal.style.display = "block";
+    });
+
+    newAddReminderButton.addEventListener("click", () => {
+        editingReminder = null;
+        reminderForm.reset();
+        document.querySelector("#reminder-modal h2").textContent = "New Reminder";
+        reminderModal.style.display = "block";
+    });
+
+    function renderReminders() {
+        reminderList.innerHTML = "";
+        reminders.forEach(reminder => {
+            const reminderItemCard = createReminderCard(reminder);
+            reminderList.appendChild(reminderItemCard);
+        });
+        if (reminders.length > 0) {
+            reminderCard.classList.add("has-reminders");
+        } else {
+            reminderCard.classList.remove("has-reminders");
+        }
+    }
+
+    function createReminderCard(reminder) {
+        const reminderItemCard = document.createElement("div");
+        reminderItemCard.classList.add("reminder-item-card");
+        reminderItemCard.innerHTML = `
+            <div class="reminder-item-main">
+                <img src="images/reminder.svg" alt="Reminder Icon" class="reminder-icon">
+                <div class="reminder-item-content">
+                    <h4>${reminder.name}</h4>
+                    <p>Date: ${reminder.date}</p>
+                    <p>Time: ${reminder.time}</p>
+                    ${reminder.description ? `<p>Description: ${reminder.description}</p>` : ''}
+                </div>
+            </div>
+            <div class="reminder-actions">
+                <button class="edit-reminder">Edit</button>
+                <button class="delete-reminder">Delete</button>
+            </div>
+        `;
+
+        reminderItemCard.querySelector(".delete-reminder").addEventListener("click", () => {
+            reminders = reminders.filter(r => r.id !== reminder.id);
+            renderReminders();
+        });
+
+        reminderItemCard.querySelector(".edit-reminder").addEventListener("click", () => {
+            editingReminder = reminder;
+            document.getElementById("task-name").value = reminder.name;
+            document.getElementById("task-date").value = reminder.date;
+            document.getElementById("task-time").value = reminder.time;
+            document.getElementById("task-description").value = reminder.description;
+            document.querySelector("#reminder-modal h2").textContent = "Edit Reminder";
+            reminderModal.style.display = "block";
+        });
+
+        return reminderItemCard;
+    }
+
     reminderForm.addEventListener("submit", (event) => {
         event.preventDefault();
 
@@ -117,21 +184,22 @@ document.addEventListener("DOMContentLoaded", function() {
         const taskDescription = document.getElementById("task-description").value;
 
         if (taskName && taskDate && taskTime) {
-            const reminderItemCard = document.createElement("div");
-            reminderItemCard.classList.add("reminder-item-card");
-
-            reminderItemCard.innerHTML = `
-                <img src="images/reminder.svg" alt="Reminder Icon" class="reminder-icon">
-                <div class="reminder-item-content">
-                    <h4>${taskName}</h4>
-                    <p>Date: ${taskDate}</p>
-                    <p>Time: ${taskTime}</p>
-                    ${taskDescription ? `<p>Description: ${taskDescription}</p>` : ''}
-                </div>
-            `;
-
-            reminderList.appendChild(reminderItemCard);
-            reminderCard.classList.add("has-reminders");
+            if (editingReminder) {
+                editingReminder.name = taskName;
+                editingReminder.date = taskDate;
+                editingReminder.time = taskTime;
+                editingReminder.description = taskDescription;
+            } else {
+                const newReminder = {
+                    id: Date.now(),
+                    name: taskName,
+                    date: taskDate,
+                    time: taskTime,
+                    description: taskDescription,
+                };
+                reminders.push(newReminder);
+            }
+            renderReminders();
             reminderModal.style.display = "none";
             reminderForm.reset();
         } else {

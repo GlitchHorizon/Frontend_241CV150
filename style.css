@@ -148,7 +148,7 @@ body {
 }
 
 .profile-icon {
-  height: 100px;
+  height: 85px;
   border-radius: 1px;
   cursor: pointer;
 }
@@ -266,10 +266,10 @@ body {
   background: conic-gradient(#f9b354 0% 80%, rgba(255, 255, 255, 0.1) 80%);
 }
 .progress-circle.green {
-  background: conic-gradient(#0dff00 0% 98%, rgba(255, 255, 255, 0.1) 98%);
+  background: conic-gradient(#32c22b 0% 98%, rgba(255, 255, 255, 0.1) 98%);
 }
 .progress-circle.red {
-  background: conic-gradient(#ff0303 0% 70%, rgba(255, 255, 255, 0.1) 70%);
+  background: conic-gradient(#d42b2b 0% 70%, rgba(255, 255, 255, 0.1) 70%);
 }
 
 /* Inner dark center */
@@ -620,6 +620,13 @@ body {
   color: #fff;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.reminder-item-main {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .reminder-icon {
@@ -874,4 +881,78 @@ body {
 
 .reminder-card.has-reminders #add-reminder-button {
     display: block;
+}
+
+.reminder-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-reminder, .delete-reminder {
+    background: none;
+    border: 1px solid #a476f5;
+    color: #a476f5;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.edit-reminder:hover, .delete-reminder:hover {
+    background: #a476f5;
+    color: #fff;
+}
+
+/* Important Links Card */
+.important-links-card {
+  background: transparent;
+  border: none;
+  border-radius: var(--radius);
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  height: 350px; /* Adjust as needed */
+}
+
+.important-links-heading {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  z-index: 5;
+}
+
+.important-links-list {
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 5;
+}
+
+.important-link-item {
+  background: rgba(20, 20, 20, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 15px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none; /* Remove underline from links */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 70px; /* Set a fixed height for each link card */
+}
+
+.important-link-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.important-link-item .link-icon {
+  padding-left: 20px; /* Apply left padding to the icon */
+  margin-right: 15px; /* Space between icon and text */
 }
