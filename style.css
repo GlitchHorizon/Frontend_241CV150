@@ -956,3 +956,34 @@ body {
   padding-left: 20px; /* Apply left padding to the icon */
   margin-right: 15px; /* Space between icon and text */
 }
+
+/* Footer Styles */
+.site-footer {
+  text-align: center;
+  padding: 25px 40px;
+  margin: 40px 60px 20px 60px; /* Match dashboard content margin */
+  color: rgba(255, 255, 255, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.site-footer p {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  color: #a476f5; /* Use the site's accent color */
+}
