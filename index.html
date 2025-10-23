@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IRIS</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -39,9 +38,40 @@
         <input type="text" class="search-input" placeholder="Search" />
       </div>
       <img src="images/Bell-icon.svg" alt="Notifications" class="bell-icon" />
+      <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <img src="images/Profile.svg" alt="Profile" class="profile-icon" />
     </div>
   </nav>
+  <div class="mobile-nav" id="mobileNav">
+        <div class="nav-item">
+        <img src="images/NITK.svg" alt="Institute Icon" />
+        <span>Institute</span>
+        <span class="dropdown">▼</span>
+      </div>
+      <div class="nav-item">
+        <img src="images/Hat.svg" alt="Academics Icon" />
+        <span>Academics</span>
+        <span class="dropdown">▼</span>
+      </div>
+      <div class="nav-item">
+        <img src="images/Academics.svg" alt="Campus Icon" />
+        <span>Campus</span>
+        <span class="dropdown">▼</span>
+      </div>
+      <div class="nav-item">
+        <img src="images/Earth.svg" alt="Alumni Icon" />
+        <span>Alumni</span>
+        <span class="dropdown">▼</span>
+      </div>
+      <div class="search-box">
+        <img src="images/Search.svg" alt="Search Icon" class="search-icon" />
+        <input type="text" class="search-input" placeholder="Search" />
+      </div>
+    </div>
   <h1 class="dashboard-heading shine" ;">Dashboard</h1>
   <main class="dashboard-content">
     <div class="dashboard-left-column">
@@ -95,6 +125,7 @@
             </div>
           </div>
           <div class="info-card">
+            <!-- <img src="images/eye-off.svg" alt="Toggle Visibility" class="eye-icon"> -->
             <span class="card-shine shine-top"></span>
             <span class="card-shine shine-bottom"></span>
             <span class="card-glow glow-top"></span>

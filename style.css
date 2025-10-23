@@ -148,7 +148,8 @@ body {
 }
 
 .profile-icon {
-  height: 85px;
+  height:80px; /* Reduced for responsiveness */
+  /* width: 50px; Added for consistency */
   border-radius: 1px;
   cursor: pointer;
 }
@@ -240,11 +241,19 @@ body {
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   height: 220px;
+  overflow-y: auto; /* Enables scroll when content overflows */
+  scrollbar-width: none; /* For Firefox */
+  -webkit-overflow-scrolling: touch; /* for iOS smooth scrolling */
+  scroll-behavior: smooth;
 }
 
 .attendance-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.attendance-card::-webkit-scrollbar {
+  display: none;
 }
 
 .progress-circle {
@@ -325,6 +334,7 @@ body {
   font-weight: 600;
   color: #fff;
   font-size: 14px;
+  word-wrap: break-word;
 }
 
 .subject {
@@ -343,6 +353,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    width: 100%;
+    word-wrap: break-word;
 }
 
 /* Neon Border Effects */
@@ -736,12 +748,13 @@ body {
 
 .class-attended {
   color: white;
+  word-wrap: break-word;
 }
 
 .last-marked {
   color: white;
   opacity: 0.7;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .info-card {
@@ -986,4 +999,76 @@ body {
 
 .footer-links a:hover {
   color: #a476f5; /* Use the site's accent color */
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    z-index: 1000;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    margin: 3px 0;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.mobile-nav {
+    display: none;
+}
+
+@media (max-width: 1130px) {
+  /* Hide the main navigation items and search box on smaller screens */
+  .nav-right .nav-item,
+  .nav-right .search-box {
+    display: none;
+  }
+
+  /* Show the hamburger menu on smaller screens */
+  .hamburger {
+    display: flex;
+  }
+
+  .mobile-nav {
+      position: fixed;
+      left: -100%;
+      top: 80px;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.9);
+      width: 100%;
+      padding: 20px 0;
+      transition: left 0.3s ease;
+      z-index: 999;
+      gap: 20px;
+  }
+
+  .mobile-nav.active {
+    left: 0;
+    display: flex;
+  }
+
+  .mobile-nav .nav-item:hover span:not(.dropdown) {
+    color: #a476f5;
+    background: none;
+  }
 }

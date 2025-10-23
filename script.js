@@ -1,4 +1,19 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileNav.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+            hamburger.classList.remove('active');
+            mobileNav.classList.remove('active');
+        }
+    });
     const attendanceGrid = document.querySelector(".attendance-grid");
     const announcementCards = document.querySelector(".announcement-cards");
 
@@ -38,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="info">
                     <p class="code">${item.code} - ${item.subject}</p>
                     ${attendanceInfo}
-                    <p class="class-attended">Class Attended - ${item.classesAttended}/${item.classesConducted}</p>
                     <p class="last-marked">Last marked on - ${formattedDate}</p>
                 </div>
             </div>
@@ -57,20 +71,23 @@ document.addEventListener("DOMContentLoaded", function() {
         announcementCards.appendChild(card);
     });
 
-    const eyeIcon = document.querySelector(".eye-icon");
-    const cgpaValue = document.querySelector(".info-value");
-    const originalCgpa = cgpaValue.textContent;
-    let isCgpaVisible = true;
+    const infoCardsWithEye = document.querySelectorAll('.info-card:has(.eye-icon)');
+    infoCardsWithEye.forEach(card => {
+        const eyeIcon = card.querySelector(".eye-icon");
+        const valueElement = card.querySelector(".info-value");
+        const originalValue = valueElement.innerHTML; // Use innerHTML to preserve sup tags
+        let isVisible = true;
 
-    eyeIcon.addEventListener("click", () => {
-        if (isCgpaVisible) {
-            cgpaValue.textContent = "---";
-            eyeIcon.src = "images/eye.svg";
-        } else {
-            cgpaValue.textContent = originalCgpa;
-            eyeIcon.src = "images/eye-off.svg";
-        }
-        isCgpaVisible = !isCgpaVisible;
+        eyeIcon.addEventListener("click", () => {
+            if (isVisible) {
+                valueElement.textContent = "---";
+                eyeIcon.src = "images/eye.svg";
+            } else {
+                valueElement.innerHTML = originalValue;
+                eyeIcon.src = "images/eye-off.svg";
+            }
+            isVisible = !isVisible;
+        });
     });
 
     const switchIcons = document.querySelectorAll(".switch-icon");
